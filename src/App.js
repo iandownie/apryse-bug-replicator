@@ -20,6 +20,7 @@ const App = () => {
     ).then((instance) => {
       const { documentViewer, annotationManager, Annotations } = instance.Core;
       setInstance(instance)
+      window.instance = instance
       documentViewer.addEventListener('documentLoaded', () => {
         const rectangleAnnot = new Annotations.RectangleAnnotation({
           PageNumber: 1,
