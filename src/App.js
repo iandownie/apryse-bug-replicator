@@ -13,29 +13,22 @@ const App = () => {
     WebViewer(
       {
         path: '/webviewer/lib',
-        initialDoc: '/files/PDFTRON_about.pdf',
-        licenseKey: 'your_license_key'  // sign up to get a free trial key at https://dev.apryse.com
+        initialDoc: '/files/DEMO-033201.pdf',
+        isReadOnly: true,
+        licenseKey: 'demo:1744309673712:613465140300000000604df59055612738f63df403800294c09265bbea'  // sign up to get a free trial key at https://dev.apryse.com
       },
+      
       viewer.current,
     ).then((instance) => {
-      const { documentViewer, annotationManager, Annotations } = instance.Core;
+      const { documentViewer
+      } = instance.Core;
       setInstance(instance)
       window.instance = instance
-      documentViewer.addEventListener('documentLoaded', () => {
-        const rectangleAnnot = new Annotations.RectangleAnnotation({
-          PageNumber: 1,
-          // values are in page coordinates with (0, 0) in the top left
-          X: 100,
-          Y: 150,
-          Width: 200,
-          Height: 50,
-          Author: annotationManager.getCurrentUser()
-        });
-
-        annotationManager.addAnnotation(rectangleAnnot);
-        // need to draw the annotation otherwise it won't show up until the page is refreshed
-        annotationManager.redrawAnnotation(rectangleAnnot);
-      });
+      console.time("test");
+      documentViewer.addEventListener("annotationsLoaded", ()=>{
+        console.timeLog("test")
+        console.log({list: documentViewer.getAnnotationManager().getAnnotationsList()})
+      })
     });
 
 
